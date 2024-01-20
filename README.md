@@ -19,3 +19,4 @@
 ## Member
 
 - GeunSam2(멘토) : 숨쉬는걸 좋아해요.
+- aaa
