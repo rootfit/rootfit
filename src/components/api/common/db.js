@@ -1,0 +1,13 @@
+import mysql from 'mysql2/promise'
+
+export default async function getConn() {
+    //초기 pool 구성 . 즉 초기 connetion을 원하는 갯수만큼 만들어서 유지
+    return await mysql.createConnection({
+        host: process.env.DB_URL,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        connectionLimit: 10
+    })
+}
