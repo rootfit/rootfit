@@ -16,14 +16,14 @@ export async function list() {
         const [results] = await conn.query(sql.list);
         return results;
     } catch (error) {
-        console.error('Error executing query', error.stack)
+        console.error('Error executing query', error.stack);
         throw new Error('board dao list error');
     } finally {
         conn.end();
     }
 }
 
-export async function mostView() {
+export async function mostview() {
     const conn = await getConn();
     try {
         const [results] = await conn.query(sql.mostview);
@@ -39,11 +39,11 @@ export async function mostView() {
 export async function increaseCnt(id) {
     const conn = await getConn();
     try {
-        const [results] = await conn.query(sql.increaseCnt, id);
+        const [results] = await conn.query(sql.increaseCnt, [id]);
         return results;
     } catch (error) {
         console.error('Error executing query', error.stack)
-        throw new Error('board dao list error');
+        throw new Error('board dao view error');
     } finally {
         conn.end();
     }
@@ -52,11 +52,11 @@ export async function increaseCnt(id) {
 export async function detail(id) {
     const conn = await getConn();
     try {
-        const [results] = await conn.query(sql.detail, id);
+        const [results] = await conn.query(sql.detail, [id]);
         return results;
     } catch (error) {
         console.error('Error executing query', error.stack)
-        throw new Error('board dao list error');
+        throw new Error('board dao detail error');
     } finally {
         conn.end();
     }

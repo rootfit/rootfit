@@ -13,7 +13,7 @@ const BoardList = () => {
   // 서버연결
   const getBoardList = useCallback(async () => {
     // 주소를 가져오면
-    const resp = await axios.get('/api/board/list')
+    const resp = await axios.get(`/api/board/list`)
     console.log(resp.data)
 
     // 반환한 데이터를 핸들링
@@ -21,7 +21,7 @@ const BoardList = () => {
   }, [])
   const mostview = async () => {
     try {
-      const resp = await axios.get('/api/board/mostview');
+      const resp = await axios.get(`/api/board/mostview`);
       setBoardList(resp.data);
     } catch (error) {
       console.error('Error fetching most viewed board list:', error);
@@ -78,7 +78,7 @@ const BoardList = () => {
                     <tr key={boardtbl.id}>
                       <td className="text-center">{boardtbl.nickname}</td>
                       <td className="text-center">
-                        <Link to={"/board/detail/" + boardtbl.id}>
+                        <Link href={`/board/detail/${boardtbl.id}`}>
                           {boardtbl.title}
                         </Link>
                       </td>
@@ -122,7 +122,7 @@ const BoardList = () => {
                     <tr key={boardtbl.id}>
                       <td className="text-center">{boardtbl.nickname}</td>
                       <td className="text-center">
-                        <Link to={"/board/detail/" + boardtbl.id}>
+                        <Link href={`/board/detail/${boardtbl.id}`}>
                           {boardtbl.title}
                         </Link>
                       </td>
