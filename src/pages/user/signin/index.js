@@ -14,13 +14,22 @@ const SignIn = () => {
 
   const signin = useCallback(async (e) => {
     e.preventDefault()
-    const resp = await axios.post('/api/user/signin', data)
-    if (resp.data.status === 500) window.alert(resp.data.message)
-    else 
-    document.cookie = `token=${resp.data.token}; path=/;`;
-    router.push('/'),
-      window.alert('로그인 성공하였습니다.')
-  }, [data, router])
+    try {
+      const resp = await axios.post('/api/user/signin', data)
+
+      if (resp.data.status === 500) {
+        window.alert(resp.data.message)
+      } else {
+        document.cookie = `token=${resp.data.token}; path=/;`;
+        router.push('/');
+        window.alert('로그인 성공하였습니다.');
+      }
+    } catch (error) {
+      console.error('로그인 요청 중 에러 발생:', error);
+      window.alert('아이디 또는 패스워드를 확인해주세요.');
+    }
+  }, [data, router]);
+
   return (
     <main id="main">
       <section className="section-signin1">
@@ -36,7 +45,7 @@ const SignIn = () => {
       <section className="section-login">
         <div className="container">
           <div className="row">
-            <form className="col-sm-5 mx-auto">
+            <form className="col-sm-5 mx-auto" onSubmit={signin}>
               <div className="mb-3">
                 <div className="form-floating">
                   <input
@@ -67,7 +76,9 @@ const SignIn = () => {
               </div>
               <div className="mb-5">
                 <div className="d-grid gap-2 mx-auto">
-                  <button type="submit" className="btn btn-dark" onClick={signin}
+                  <button
+                    type="submit"
+                    className="btn btn-dark"
                     style={{ height: '60px', fontWeight: 'bold' }}>
                     로그인
                   </button>
